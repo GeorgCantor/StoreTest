@@ -1,7 +1,8 @@
-package com.georgcantor.storetest
+package com.georgcantor.storetest.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.georgcantor.storetest.R
 
 class MainActivity : AppCompatActivity() {
 
