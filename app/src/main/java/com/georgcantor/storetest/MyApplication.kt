@@ -1,6 +1,9 @@
 package com.georgcantor.storetest
 
 import android.app.Application
+import com.georgcantor.storetest.di.appModule
+import com.georgcantor.storetest.di.repositoryModule
+import com.georgcantor.storetest.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 

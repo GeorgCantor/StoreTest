@@ -10,21 +10,21 @@ data class Product(
     @PrimaryKey
     val id: Int,
     val model: String?,
-    val price: Long,
+    val price: Float,
     val quantity: Int
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
         parcel.readString(),
-        parcel.readLong(),
+        parcel.readFloat(),
         parcel.readInt()
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeString(model)
-        parcel.writeLong(price)
+        parcel.writeFloat(price)
         parcel.writeInt(quantity)
     }
 

@@ -10,6 +10,10 @@ class ProductsRepository(private val dao: ProductsDao) {
         val products = dao.getAll()
         if (products.isNotEmpty()) return products
 
+        FakeServer.getProducts().map {
+            dao.insert(it)
+        }
+
         return FakeServer.getProducts()
     }
 
