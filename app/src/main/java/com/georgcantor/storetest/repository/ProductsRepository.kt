@@ -8,7 +8,12 @@ class ProductsRepository(private val dao: ProductsDao) {
 
     suspend fun getProducts(): List<Product> {
         val products = dao.getAll()
-        if (products.isNotEmpty()) return products
+        if (products.isNotEmpty()) {
+            products.map {
+                if (it.quantity == 0) dao.deleteById(it.id)
+            }
+            return dao.getAll()
+        }
 
         FakeServer.getProducts().map {
             dao.insert(it)

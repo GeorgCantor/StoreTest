@@ -11,7 +11,7 @@ data class Product(
     val id: Int,
     val model: String?,
     val price: Float,
-    val quantity: Int
+    var quantity: Int
 ) : Parcelable {
 
     constructor(parcel: Parcel) : this(

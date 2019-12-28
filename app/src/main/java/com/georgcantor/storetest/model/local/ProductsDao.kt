@@ -24,4 +24,7 @@ interface ProductsDao {
     @Query("SELECT * FROM products")
     suspend fun getAll(): List<Product>
 
+    @Query("UPDATE products SET quantity = quantity-1 WHERE id LIKE :id")
+    suspend fun updateById(id: Int)
+
 }
