@@ -30,11 +30,13 @@ class StoreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        viewModel.getProducts()
 
-        viewModel.fragmentNumbers.observe(viewLifecycleOwner, Observer { number ->
+        viewModel.products.observe(viewLifecycleOwner, Observer { product ->
             val adapter = ViewPagerAdapter(childFragmentManager)
-            for (i in 0..number) {
-                adapter.addFragment(ProductFragment.newInstance(i.toString()), i.toString())
+
+            product.map {
+                adapter.addFragment(ProductFragment.newInstance(it), it.model ?: "")
             }
 
             viewPager.adapter = adapter

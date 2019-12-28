@@ -8,7 +8,7 @@ import com.georgcantor.storetest.model.Product
 
 @Database(
     entities = [Product::class],
-    version = DatabaseMigration.latestVersion,
+    version = 1,
     exportSchema = false
 )
 abstract class ProductsDatabase : RoomDatabase() {
@@ -16,10 +16,12 @@ abstract class ProductsDatabase : RoomDatabase() {
     companion object {
         private const val dbName = "products_db"
 
-        fun buildDefault(context: Context) =
-            Room.databaseBuilder(context, ProductsDatabase::class.java, dbName)
-                .addMigrations(*DatabaseMigration.allMigrations)
-                .build()
+        fun buildDefault(context: Context) = Room.databaseBuilder(
+            context,
+            ProductsDatabase::class.java,
+            dbName
+        )
+            .build()
     }
 
     abstract fun dao(): ProductsDao
