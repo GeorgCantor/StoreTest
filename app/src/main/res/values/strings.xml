@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Store</string>
+    <string name="front_nav_title">Store-Front</string>
+    <string name="back_nav_title">Back-End</string>
+</resources>
