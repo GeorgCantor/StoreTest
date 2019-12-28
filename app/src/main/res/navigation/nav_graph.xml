@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+<navigation
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/tabsFragment">
+    app:startDestination="@id/storeFragment">
 
-<!--    <fragment-->
-<!--        android:id="@+id/tabsFragment"-->
-<!--        android:name="com.georgcantor.newsproject.view.fragment.TabsFragment"-->
-<!--        android:label="TabsFragment" />-->
+    <fragment
+        android:id="@+id/storeFragment"
+        android:name="com.georgcantor.storetest.view.fragment.StoreFragment"
+        android:label="StoreFragment" />
 
 </navigation>

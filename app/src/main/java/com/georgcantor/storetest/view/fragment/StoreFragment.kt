@@ -5,8 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.georgcantor.storetest.R
+import com.georgcantor.storetest.view.adapter.ViewPagerAdapter
 import com.georgcantor.storetest.viewmodel.StoreViewModel
+import kotlinx.android.synthetic.main.fragment_store.*
+import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.core.parameter.parametersOf
 
 class StoreFragment : Fragment() {
 
@@ -14,6 +19,7 @@ class StoreFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        viewModel = getViewModel { parametersOf() }
     }
 
     override fun onCreateView(
@@ -24,6 +30,15 @@ class StoreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        viewModel.fragmentNumbers.observe(viewLifecycleOwner, Observer { number ->
+            val adapter = ViewPagerAdapter(childFragmentManager)
+            for (i in 0..number) {
+                adapter.addFragment(ProductFragment.newInstance(i.toString()), i.toString())
+            }
+
+            viewPager.adapter = adapter
+        })
     }
 
 }
