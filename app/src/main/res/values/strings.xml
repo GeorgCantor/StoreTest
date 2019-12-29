@@ -2,4 +2,7 @@
     <string name="app_name">Store</string>
     <string name="front_nav_title">Store-Front</string>
     <string name="back_nav_title">Back-End</string>
+
+    <string name="price_format">%1$s руб.</string>
+    <string name="quantity_format">%1$s шт.</string>
 </resources>

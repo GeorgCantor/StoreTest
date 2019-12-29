@@ -46,17 +46,17 @@ class ProductFragment : Fragment() {
         val product: Product = arguments?.get(PRODUCT) as Product
 
         modelTextView.text = product.model
-        priceTextView.text = product.price.toString()
-        quantityTextView.text = product.quantity.toString()
+        priceTextView.text = getString(R.string.price_format, product.price.toString())
+        quantityTextView.text = getString(R.string.quantity_format, product.quantity.toString())
 
         buyButton.setOnClickListener {
             viewModel.buyProduct(product.id)
             product.quantity--
+            quantityTextView.text = getString(R.string.quantity_format, product.quantity.toString())
             if (product.quantity == 0) {
                 requireContext().shortToast("${product.model} закончился")
                 requireActivity().recreate()
             }
-            quantityTextView.text = product.quantity.toString()
         }
     }
 
