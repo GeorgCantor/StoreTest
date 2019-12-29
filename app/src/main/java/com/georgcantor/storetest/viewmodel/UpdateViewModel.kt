@@ -1,10 +1,13 @@
 package com.georgcantor.storetest.viewmodel
 
+import androidx.lifecycle.MutableLiveData
 import com.georgcantor.storetest.model.Product
 import com.georgcantor.storetest.model.local.ProductsDao
 import kotlinx.coroutines.launch
 
 class UpdateViewModel(private val dao: ProductsDao) : BaseViewModel() {
+
+    val updatedProduct = MutableLiveData<Product>()
 
     fun addProduct(product: Product) {
         ioScope.launch {
@@ -21,6 +24,10 @@ class UpdateViewModel(private val dao: ProductsDao) : BaseViewModel() {
                 product.quantity
             )
         }
+    }
+
+    fun setUpdatedProduct(product: Product?) {
+        updatedProduct.value = product
     }
 
 }

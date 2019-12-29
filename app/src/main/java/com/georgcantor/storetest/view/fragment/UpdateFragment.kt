@@ -6,13 +6,15 @@ import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.georgcantor.storetest.R
 import com.georgcantor.storetest.model.Product
 import com.georgcantor.storetest.util.shortToast
 import com.georgcantor.storetest.viewmodel.UpdateViewModel
 import kotlinx.android.synthetic.main.fragment_update.*
-import org.koin.androidx.viewmodel.ext.android.getViewModel
+import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 import org.koin.core.parameter.parametersOf
+import java.lang.Float
 
 class UpdateFragment : Fragment() {
 
@@ -21,7 +23,7 @@ class UpdateFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-        viewModel = getViewModel { parametersOf() }
+        viewModel = getSharedViewModel { parametersOf() }
     }
 
     override fun onCreateView(
@@ -37,6 +39,14 @@ class UpdateFragment : Fragment() {
         actionBar?.setHomeAsUpIndicator(drawable)
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.setDisplayShowTitleEnabled(false)
+
+        viewModel.updatedProduct.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                nameEditText.setText(it.model)
+                priceEditText.setText(it.price.toString())
+                quantityEditText.setText(it.quantity.toString())
+            }
+        })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -48,21 +58,35 @@ class UpdateFragment : Fragment() {
         when (item.itemId) {
             android.R.id.home -> requireActivity().onBackPressed()
             R.id.save_product -> {
-                if (nameEditText.text.isEmpty() || priceEditText.text.isEmpty() || quantityEditText.text.isEmpty()) {
-                    requireContext().shortToast("Заполните все поля")
-                } else {
-                    viewModel.addProduct(
-                        Product(
-                            id = (0..100000).random(),
-                            model = nameEditText.text.toString(),
-                            price = java.lang.Float.valueOf(priceEditText.text.toString()),
-                            quantity = quantityEditText.text.toString().toInt()
-                        )
-                    )
-                    Handler().postDelayed({
-                        requireActivity().onBackPressed()
-                    }, 500)
-                }
+                viewModel.updatedProduct.observe(viewLifecycleOwner, Observer { product ->
+                    if (nameEditText.text.isEmpty() || priceEditText.text.isEmpty() || quantityEditText.text.isEmpty()) {
+                        requireContext().shortToast("Заполните все поля")
+                    } else {
+                        if (product != null) {
+                            viewModel.updateProduct(
+                                Product(
+                                    id = product.id,
+                                    model = nameEditText.text.toString(),
+                                    price = Float.valueOf(priceEditText.text.toString()),
+                                    quantity = quantityEditText.text.toString().toInt()
+                                )
+                            )
+                        } else {
+                            viewModel.addProduct(
+                                Product(
+                                    id = (0..100000).random(),
+                                    model = nameEditText.text.toString(),
+                                    price = Float.valueOf(priceEditText.text.toString()),
+                                    quantity = quantityEditText.text.toString().toInt()
+                                )
+                            )
+                        }
+
+                        Handler().postDelayed({
+                            requireActivity().onBackPressed()
+                        }, 500)
+                    }
+                })
             }
         }
         return false

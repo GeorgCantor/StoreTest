@@ -8,22 +8,24 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.georgcantor.storetest.R
 import com.georgcantor.storetest.model.Product
-import com.georgcantor.storetest.util.shortToast
 import com.georgcantor.storetest.view.adapter.BackAdapter
 import com.georgcantor.storetest.viewmodel.BackViewModel
+import com.georgcantor.storetest.viewmodel.UpdateViewModel
 import kotlinx.android.synthetic.main.fragment_back.*
+import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
-
 
 class BackFragment : Fragment() {
 
     private lateinit var viewModel: BackViewModel
+    private lateinit var updateViewModel: UpdateViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
         viewModel = getViewModel { parametersOf() }
+        updateViewModel = getSharedViewModel { parametersOf() }
     }
 
     override fun onCreateView(
@@ -46,7 +48,8 @@ class BackFragment : Fragment() {
                 requireContext(),
                 it as MutableList<Product>
             ) { product ->
-                requireContext().shortToast(product.model.toString())
+                updateViewModel.setUpdatedProduct(product)
+                view?.let { Navigation.findNavController(it).navigate(R.id.updateFragment) }
             }
         })
     }
@@ -59,6 +62,7 @@ class BackFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.add_product -> {
+                updateViewModel.setUpdatedProduct(null)
                 view?.let { Navigation.findNavController(it).navigate(R.id.updateFragment) }
             }
         }
