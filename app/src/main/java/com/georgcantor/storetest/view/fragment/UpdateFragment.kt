@@ -1,17 +1,18 @@
 package com.georgcantor.storetest.view.fragment
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.georgcantor.storetest.R
 import com.georgcantor.storetest.model.Product
+import com.georgcantor.storetest.util.shortToast
 import com.georgcantor.storetest.viewmodel.UpdateViewModel
 import kotlinx.android.synthetic.main.fragment_update.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
-
 
 class UpdateFragment : Fragment() {
 
@@ -47,14 +48,21 @@ class UpdateFragment : Fragment() {
         when (item.itemId) {
             android.R.id.home -> requireActivity().onBackPressed()
             R.id.save_product -> {
-                viewModel.addProduct(
-                    Product(
-                        id = (0..100000).random(),
-                        model = nameEditText.text.toString(),
-                        price = java.lang.Float.valueOf(priceEditText.text.toString()),
-                        quantity = 1
+                if (nameEditText.text.isEmpty() || priceEditText.text.isEmpty() || quantityEditText.text.isEmpty()) {
+                    requireContext().shortToast("Заполните все поля")
+                } else {
+                    viewModel.addProduct(
+                        Product(
+                            id = (0..100000).random(),
+                            model = nameEditText.text.toString(),
+                            price = java.lang.Float.valueOf(priceEditText.text.toString()),
+                            quantity = quantityEditText.text.toString().toInt()
+                        )
                     )
-                )
+                    Handler().postDelayed({
+                        requireActivity().onBackPressed()
+                    }, 500)
+                }
             }
         }
         return false
