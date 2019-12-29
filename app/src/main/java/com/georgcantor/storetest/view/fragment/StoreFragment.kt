@@ -30,9 +30,8 @@ class StoreFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel.getProducts()
 
-        viewModel.products.observe(viewLifecycleOwner, Observer { product ->
+        viewModel.getProducts().observe(viewLifecycleOwner, Observer { product ->
             val adapter = ViewPagerAdapter(childFragmentManager)
 
             product.map {

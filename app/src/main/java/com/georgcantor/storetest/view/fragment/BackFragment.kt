@@ -39,9 +39,8 @@ class BackFragment : Fragment() {
     private fun setupRecyclerView() {
         productsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         productsRecyclerView.setHasFixedSize(true)
-        viewModel.getProducts()
 
-        viewModel.products.observe(viewLifecycleOwner, Observer {
+        viewModel.getProducts().observe(viewLifecycleOwner, Observer {
             productsRecyclerView.adapter = BackAdapter(
                 requireContext(),
                 it as MutableList<Product>
