@@ -54,7 +54,7 @@ class ProductFragment : Fragment() {
             product.quantity--
             quantityTextView.text = getString(R.string.quantity_format, product.quantity.toString())
             if (product.quantity == 0) {
-                requireContext().shortToast("${product.model} закончился")
+                requireContext().shortToast(getString(R.string.empty_toast_format, product.model))
                 requireActivity().recreate()
             }
         }

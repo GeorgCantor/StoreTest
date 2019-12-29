@@ -5,4 +5,12 @@
 
     <string name="price_format">%1$s руб.</string>
     <string name="quantity_format">%1$s шт.</string>
+    <string name="empty_toast_format">%1$s закончился</string>
+
+    <string name="fill_all_fields">Заполните все поля</string>
+
+    <string name="quantity">Количество</string>
+    <string name="name">Название</string>
+    <string name="buy">Купить</string>
+    <string name="price">Цена</string>
 </resources>

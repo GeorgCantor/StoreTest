@@ -3,13 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="16dp"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/nameTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Название" />
+        android:text="@string/name"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/nameEditText"
@@ -20,22 +22,28 @@
         android:id="@+id/priceTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Цена" />
+        android:layout_marginTop="16dp"
+        android:text="@string/price"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/priceEditText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:inputType="number" />
 
     <TextView
         android:id="@+id/quantityTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Количество" />
+        android:layout_marginTop="16dp"
+        android:text="@string/quantity"
+        android:textSize="18sp" />
 
     <EditText
         android:id="@+id/quantityEditText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:inputType="number" />
 
 </LinearLayout>

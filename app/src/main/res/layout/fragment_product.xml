@@ -43,7 +43,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Цена"
+                android:text="@string/price"
                 android:textColor="@android:color/black"
                 android:textSize="24sp" />
 
@@ -76,7 +76,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Количество"
+                android:text="@string/quantity"
                 android:textColor="@android:color/black"
                 android:textSize="24sp" />
 
@@ -96,6 +96,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Купить" />
+        android:text="@string/buy" />
 
 </LinearLayout>

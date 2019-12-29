@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.view.*
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -22,6 +23,7 @@ class UpdateFragment : Fragment() {
 
     private lateinit var viewModel: UpdateViewModel
     private lateinit var manager: InputMethodManager
+    private lateinit var actionBar: ActionBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,10 +40,10 @@ class UpdateFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val drawable = ContextCompat.getDrawable(requireContext(), R.drawable.ic_cancel)
-        val actionBar = (activity as AppCompatActivity).supportActionBar
-        actionBar?.setHomeAsUpIndicator(drawable)
-        actionBar?.setDisplayHomeAsUpEnabled(true)
-        actionBar?.setDisplayShowTitleEnabled(false)
+        actionBar = (activity as AppCompatActivity).supportActionBar as ActionBar
+        actionBar.setHomeAsUpIndicator(drawable)
+        actionBar.setDisplayHomeAsUpEnabled(true)
+        actionBar.setDisplayShowTitleEnabled(false)
 
         manager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
@@ -65,7 +67,7 @@ class UpdateFragment : Fragment() {
             R.id.save_product -> {
                 viewModel.updatedProduct.observe(viewLifecycleOwner, Observer { product ->
                     if (nameEditText.text.isEmpty() || priceEditText.text.isEmpty() || quantityEditText.text.isEmpty()) {
-                        requireContext().shortToast("Заполните все поля")
+                        requireContext().shortToast(getString(R.string.fill_all_fields))
                     } else {
                         hideKeyboard()
                         if (product != null) {
@@ -99,7 +101,8 @@ class UpdateFragment : Fragment() {
     }
 
     override fun onDestroyView() {
-        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        actionBar.setDisplayHomeAsUpEnabled(false)
+        actionBar.setDisplayShowTitleEnabled(true)
         hideKeyboard()
         super.onDestroyView()
     }
