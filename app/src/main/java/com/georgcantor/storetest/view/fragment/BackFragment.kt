@@ -1,11 +1,10 @@
 package com.georgcantor.storetest.view.fragment
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.georgcantor.storetest.R
 import com.georgcantor.storetest.model.Product
@@ -16,12 +15,14 @@ import kotlinx.android.synthetic.main.fragment_back.*
 import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.core.parameter.parametersOf
 
+
 class BackFragment : Fragment() {
 
     private lateinit var viewModel: BackViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         viewModel = getViewModel { parametersOf() }
     }
 
@@ -48,6 +49,20 @@ class BackFragment : Fragment() {
                 requireContext().shortToast(product.model.toString())
             }
         })
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_back, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.add_product -> {
+                view?.let { Navigation.findNavController(it).navigate(R.id.updateFragment) }
+            }
+        }
+        return false
     }
 
 }

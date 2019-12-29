@@ -15,4 +15,9 @@
         android:name="com.georgcantor.storetest.view.fragment.BackFragment"
         android:label="BackFragment" />
 
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.georgcantor.storetest.view.fragment.UpdateFragment"
+        android:label="UpdateFragment" />
+
 </navigation>

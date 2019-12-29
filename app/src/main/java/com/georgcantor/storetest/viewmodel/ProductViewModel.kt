@@ -7,7 +7,7 @@ class ProductViewModel(private val dao: ProductsDao) : BaseViewModel() {
 
     fun buyProduct(id: Int) {
         ioScope.launch {
-            dao.updateById(id)
+            dao.updateQuantityById(id)
         }
     }
 
