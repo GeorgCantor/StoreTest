@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
                         .navigate(R.id.storeFragment, null, navOption)
                 }
                 R.id.nav_back -> {
+                    Navigation.findNavController(this, R.id.navHostFragment)
+                        .navigate(R.id.backFragment, null, navOption)
                 }
             }
             true

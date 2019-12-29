@@ -2,6 +2,7 @@ package com.georgcantor.storetest.di
 
 import com.georgcantor.storetest.model.local.ProductsDatabase
 import com.georgcantor.storetest.repository.ProductsRepository
+import com.georgcantor.storetest.viewmodel.BackViewModel
 import com.georgcantor.storetest.viewmodel.ProductViewModel
 import com.georgcantor.storetest.viewmodel.StoreViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -17,6 +18,9 @@ val viewModelModule = module {
     }
     viewModel {
         ProductViewModel(get())
+    }
+    viewModel {
+        BackViewModel(get())
     }
 }
 

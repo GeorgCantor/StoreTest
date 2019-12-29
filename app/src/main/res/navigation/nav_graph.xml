@@ -10,4 +10,9 @@
         android:name="com.georgcantor.storetest.view.fragment.StoreFragment"
         android:label="StoreFragment" />
 
+    <fragment
+        android:id="@+id/backFragment"
+        android:name="com.georgcantor.storetest.view.fragment.BackFragment"
+        android:label="BackFragment" />
+
 </navigation>

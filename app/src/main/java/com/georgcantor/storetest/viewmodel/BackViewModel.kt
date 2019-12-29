@@ -1,4 +1,18 @@
 package com.georgcantor.storetest.viewmodel
 
-class BackViewModel : BaseViewModel() {
+import androidx.lifecycle.MutableLiveData
+import com.georgcantor.storetest.model.Product
+import com.georgcantor.storetest.repository.ProductsRepository
+import kotlinx.coroutines.launch
+
+class BackViewModel(private val repository: ProductsRepository) : BaseViewModel() {
+
+    val products = MutableLiveData<List<Product>>()
+
+    fun getProducts() {
+        ioScope.launch {
+            products.postValue(repository.getProducts())
+        }
+    }
+
 }
