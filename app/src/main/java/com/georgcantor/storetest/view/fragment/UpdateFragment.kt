@@ -1,8 +1,10 @@
 package com.georgcantor.storetest.view.fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.view.*
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -19,6 +21,7 @@ import java.lang.Float
 class UpdateFragment : Fragment() {
 
     private lateinit var viewModel: UpdateViewModel
+    private lateinit var manager: InputMethodManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,6 +42,8 @@ class UpdateFragment : Fragment() {
         actionBar?.setHomeAsUpIndicator(drawable)
         actionBar?.setDisplayHomeAsUpEnabled(true)
         actionBar?.setDisplayShowTitleEnabled(false)
+
+        manager = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
         viewModel.updatedProduct.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -62,6 +67,7 @@ class UpdateFragment : Fragment() {
                     if (nameEditText.text.isEmpty() || priceEditText.text.isEmpty() || quantityEditText.text.isEmpty()) {
                         requireContext().shortToast("Заполните все поля")
                     } else {
+                        hideKeyboard()
                         if (product != null) {
                             viewModel.updateProduct(
                                 Product(
@@ -94,7 +100,12 @@ class UpdateFragment : Fragment() {
 
     override fun onDestroyView() {
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        hideKeyboard()
         super.onDestroyView()
+    }
+
+    private fun hideKeyboard() {
+        manager.hideSoftInputFromWindow(requireActivity().window.decorView.rootView.windowToken, 0)
     }
 
 }
