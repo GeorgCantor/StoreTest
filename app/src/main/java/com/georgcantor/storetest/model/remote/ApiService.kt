@@ -8,7 +8,7 @@ import retrofit2.http.Query
 interface ApiService {
 
     @GET("test_task/test.php")
-    suspend fun getCompanies(): ApiResponse
+    suspend fun getCompanies(): MutableList<ApiResponse>
 
     @GET("test_task/test.php")
     suspend fun getCompany(@Query("id") id: Int): Company
