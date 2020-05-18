@@ -23,6 +23,7 @@ class CompaniesViewModel(private val repository: ApiRepository) : ViewModel() {
         viewModelScope.launch(exceptionHandler) {
             val response = repository.getCompanies()
             companies.postValue(response)
+            isProgressVisible.postValue(false)
         }
     }
 }

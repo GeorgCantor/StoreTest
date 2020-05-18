@@ -40,6 +40,9 @@ class CompaniesFragment : Fragment() {
             error.observe(viewLifecycleOwner) { context?.shortToast(it) }
 
             companies.observe(viewLifecycleOwner) {
+                companies_recycler.adapter = CompaniesAdapter(it) {
+                    context?.shortToast(it.name ?: "")
+                }
             }
         }
     }

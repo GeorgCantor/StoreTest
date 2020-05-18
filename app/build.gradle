@@ -12,7 +12,7 @@ android {
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
-        buildConfigField("String", "BASE_URL", "\"http://megakohz.bget.ru/\"")
+        buildConfigField("String", "BASE_URL", "\"http://megakohz.bget.ru/test_task/\"")
     }
     buildTypes {
         release {

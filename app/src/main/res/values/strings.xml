@@ -1,16 +1,3 @@
 <resources>
-    <string name="app_name">Store</string>
-    <string name="front_nav_title">Store-Front</string>
-    <string name="back_nav_title">Back-End</string>
-
-    <string name="price_format">%1$s руб.</string>
-    <string name="quantity_format">%1$s шт.</string>
-    <string name="empty_toast_format">%1$s закончился</string>
-
-    <string name="fill_all_fields">Заполните все поля</string>
-
-    <string name="quantity">Количество</string>
-    <string name="name">Название</string>
-    <string name="buy">Купить</string>
-    <string name="price">Цена</string>
+    <string name="app_name">Companies</string>
 </resources>

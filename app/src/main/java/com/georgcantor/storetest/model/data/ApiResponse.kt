@@ -6,13 +6,13 @@ import com.google.gson.annotations.SerializedName
 data class ApiResponse(
     @SerializedName("id")
     @Expose
-    var id: String? = null,
+    var id: String?,
 
     @SerializedName("name")
     @Expose
-    var name: String? = null,
+    var name: String?,
 
     @SerializedName("img")
     @Expose
-    var img: String? = null
+    var img: String?
 )
