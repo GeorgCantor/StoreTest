@@ -3,7 +3,6 @@ package com.georgcantor.storetest.model.remote
 import android.content.Context
 import com.georgcantor.storetest.BuildConfig
 import com.georgcantor.storetest.model.remote.interceptor.OfflineResponseCacheInterceptor
-import com.georgcantor.storetest.model.remote.interceptor.ResponseCacheInterceptor
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -19,7 +18,6 @@ object ApiClient {
         loggingInterceptor.level = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
 
         val okHttpClient = OkHttpClient().newBuilder()
-            .addNetworkInterceptor(ResponseCacheInterceptor())
             .addInterceptor(OfflineResponseCacheInterceptor(context))
             .addInterceptor(loggingInterceptor)
             .cache(Cache(File(context.cacheDir, "ResponsesCache"), (10 * 1024 * 1024).toLong()))
