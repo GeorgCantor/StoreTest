@@ -50,7 +50,7 @@ class CompanyFragment : Fragment() {
 
                 title.text = it.name
                 description.text = it.description
-                phone.text = if (it.phone.isBlank()) "нет" else it.phone
+                it.phone.apply { phone.text = if (this.isBlank()) "нет" else this }
             }
         }
     }
