@@ -1,7 +1,7 @@
 package com.georgcantor.storetest
 
 import android.app.Application
-import com.georgcantor.storetest.di.appModule
+import com.georgcantor.storetest.di.apiModule
 import com.georgcantor.storetest.di.repositoryModule
 import com.georgcantor.storetest.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
@@ -14,8 +14,7 @@ class MyApplication : Application() {
 
         startKoin {
             androidContext(this@MyApplication)
-            modules(arrayListOf(appModule, viewModelModule, repositoryModule))
+            modules(arrayListOf(apiModule, repositoryModule, viewModelModule))
         }
     }
-
 }
