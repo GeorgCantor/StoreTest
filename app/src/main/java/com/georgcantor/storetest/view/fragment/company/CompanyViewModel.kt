@@ -1,21 +1,34 @@
 package com.georgcantor.storetest.view.fragment.company
 
+import android.app.Application
+import android.util.MalformedJsonException
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.georgcantor.storetest.MyApplication
+import com.georgcantor.storetest.R
 import com.georgcantor.storetest.model.data.Company
 import com.georgcantor.storetest.repository.ApiRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 
-class CompanyViewModel(private val repository: ApiRepository) : ViewModel() {
+class CompanyViewModel(
+    app: Application,
+    private val repository: ApiRepository
+) : AndroidViewModel(app) {
+
+    private val context = getApplication<MyApplication>()
 
     val company = MutableLiveData<Company>()
     val isProgressVisible = MutableLiveData<Boolean>().apply { this.value = true }
     val error = MutableLiveData<String>()
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        error.postValue(throwable.message)
+        when (throwable.toString().contains("MalformedJsonException")) {
+            true -> error.postValue(context.getString(R.string.json_error_message))
+            false -> error.postValue(throwable.message)
+        }
+
         isProgressVisible.postValue(false)
     }
 
