@@ -11,5 +11,5 @@ interface ApiService {
     suspend fun getCompanies(): MutableList<ApiResponse>
 
     @GET("test.php")
-    suspend fun getCompany(@Query("id") id: Int): Company
+    suspend fun getCompany(@Query("id") id: String): MutableList<Company>
 }

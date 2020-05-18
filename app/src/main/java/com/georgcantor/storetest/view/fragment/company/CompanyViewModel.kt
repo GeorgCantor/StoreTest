@@ -1,16 +1,16 @@
-package com.georgcantor.storetest.view.fragment
+package com.georgcantor.storetest.view.fragment.company
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.georgcantor.storetest.model.data.ApiResponse
+import com.georgcantor.storetest.model.data.Company
 import com.georgcantor.storetest.repository.ApiRepository
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 
-class CompaniesViewModel(private val repository: ApiRepository) : ViewModel() {
+class CompanyViewModel(private val repository: ApiRepository) : ViewModel() {
 
-    val companies = MutableLiveData<MutableList<ApiResponse>>()
+    val company = MutableLiveData<Company>()
     val isProgressVisible = MutableLiveData<Boolean>().apply { this.value = true }
     val error = MutableLiveData<String>()
 
@@ -19,10 +19,10 @@ class CompaniesViewModel(private val repository: ApiRepository) : ViewModel() {
         isProgressVisible.postValue(false)
     }
 
-    init {
+    fun getCompany(id: String) {
         viewModelScope.launch(exceptionHandler) {
-            val response = repository.getCompanies()
-            companies.postValue(response)
+            val response = repository.getCompany(id)
+            company.postValue(response[0])
             isProgressVisible.postValue(false)
         }
     }

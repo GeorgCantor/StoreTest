@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Companies</string>
+    <string name="phone_title">Номер телефона: </string>
 </resources>

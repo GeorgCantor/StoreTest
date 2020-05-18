@@ -1,4 +1,4 @@
-package com.georgcantor.storetest.view.fragment
+package com.georgcantor.storetest.view.fragment.companies
 
 import android.view.LayoutInflater
 import android.view.View

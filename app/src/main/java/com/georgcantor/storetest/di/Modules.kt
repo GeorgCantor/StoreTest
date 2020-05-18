@@ -2,7 +2,8 @@ package com.georgcantor.storetest.di
 
 import com.georgcantor.storetest.model.remote.ApiClient
 import com.georgcantor.storetest.repository.ApiRepository
-import com.georgcantor.storetest.view.fragment.CompaniesViewModel
+import com.georgcantor.storetest.view.fragment.companies.CompaniesViewModel
+import com.georgcantor.storetest.view.fragment.company.CompanyViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
@@ -17,5 +18,8 @@ val repositoryModule = module {
 val viewModelModule = module {
     viewModel {
         CompaniesViewModel(get())
+    }
+    viewModel {
+        CompanyViewModel(get())
     }
 }

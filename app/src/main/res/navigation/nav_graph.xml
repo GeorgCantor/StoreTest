@@ -6,7 +6,16 @@
 
     <fragment
         android:id="@+id/companiesFragment"
-        android:name="com.georgcantor.storetest.view.fragment.CompaniesFragment"
-        android:label="CompaniesFragment" />
+        android:name="com.georgcantor.storetest.view.fragment.companies.CompaniesFragment"
+        android:label="CompaniesFragment">
+        <action
+            android:id="@+id/action_companiesFragment_to_companyFragment"
+            app:destination="@id/companyFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/companyFragment"
+        android:name="com.georgcantor.storetest.view.fragment.company.CompanyFragment"
+        android:label="CompanyFragment" />
 
 </navigation>
